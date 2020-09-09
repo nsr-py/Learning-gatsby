@@ -13,6 +13,9 @@ const BlogPage = () => {
               title
               date
             }
+            fields {
+              slug
+            }
           }
         }
       }
@@ -23,7 +26,14 @@ const BlogPage = () => {
       <h1> These are all my writings </h1>
       <ol>
         {data.allMarkdownRemark.edges.map(post => {
-          return (<li><h2>{post.node.frontmatter.title}</h2><p>{post.node.frontmatter.date}</p></li>)
+          return (
+            <li>
+              <Link to={`/blog/${post.node.fields.slug}`}>
+                <h2>{post.node.frontmatter.title}</h2>
+              </Link>
+              <p>{post.node.frontmatter.date}</p>
+            </li>
+            )
         })}
       </ol>
     </Layout>
